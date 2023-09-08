@@ -32,6 +32,4 @@ if count > 1:
 elif count == 1:
     print(f"1 instance of {letter} found in {user}")
 else:
-    print(f"No insances of {letter} found in {user}")
-
-
+    print(f"No instances of {letter} found in {user}")
