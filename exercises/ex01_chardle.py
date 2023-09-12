@@ -1,4 +1,4 @@
-"""EX01 - Chardle - A cute step twoard Wordle."""
+"""EX01 - Chardle - A cute step toward Wordle."""
 
 __author__ = "730655251"
 
