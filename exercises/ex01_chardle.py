@@ -13,23 +13,23 @@ if len(letter) != 1:
 print(f"Searching for {letter} in {user}")
 
 if user[0] == letter:
-    print(f"{letter} found at index 0")
+    print(letter + " found at index 0")
     count += 1
 if user[1] == letter:
-    print(f"{letter} found at index 1")
+    print(letter + " found at index 1")
     count += 1
 if user[2] == letter:
-    print(f"{letter} found at index 2")
+    print(letter + " found at index 2")
     count += 1
 if user[3] == letter:
-    print(f"{letter} found at index 3")
+    print(letter + " found at index 3")
     count += 1
 if user[4] == letter:
-    print(f"{letter} found at index 4")
+    print(letter + " found at index 4")
     count += 1
 if count > 1:
-    print(f"{count} instances of {letter} found in {user}")
+    print(str(count) + " instances of " + letter + " found in " + user)
 elif count == 1:
-    print(f"1 instance of {letter} found in {user}")
+    print("1 instance of " + letter + " found in " + user)
 else:
-    print(f"No instances of {letter} found in {user}")
+    print("No instances of " + letter + " found in " + user)
