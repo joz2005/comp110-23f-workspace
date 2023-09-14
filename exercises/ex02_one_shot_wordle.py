@@ -1,10 +1,10 @@
 __author__ = "730655251"
 
 secret_word = "python"
-user = str(input(f"What is your {len(secret_word)}-letter guess? "))
+user = str(input(f"What is your {len(secret_word)}-letter guess?"))
 
 while len(user) != len(secret_word):
-    user = str(input(f"That was not {len(secret_word)} letters! Try again: "))
+    user = str(input(f"That was not {len(secret_word)} letters! Try again:"))
 
 index = 0
 box_string = ""
@@ -12,16 +12,16 @@ box_string = ""
 while index < len(user):
 
     letter_found = False
-    letter_index = 0
+    alt_index = 0
 
     if user[index] == secret_word[index]:
         box_string += "\U0001F7E9"
 
     else:
-        while not letter_found and letter_index < len(secret_word):
-            if user[index] == secret_word[letter_index]:
+        while not letter_found and alt_index < len(secret_word):
+            if user[index] == secret_word[alt_index]:
                 letter_found = True
-            letter_index += 1
+            alt_index += 1
         if letter_found:
             box_string += "\U0001F7E8"
         else:
