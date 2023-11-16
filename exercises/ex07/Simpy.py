@@ -46,7 +46,8 @@ class Simpy:
 
         new_list: list[float] = []
 
-        if isinstance(addition, float):
+        if type(addition) == float:
+            print(new_list)
             for x in range(len(self.values)):
                 new_list.append(self.values[x] + addition)
         else:
@@ -58,7 +59,7 @@ class Simpy:
     def __pow__(self, exponent: Simpy | float) -> Simpy:
         new_list: list[float] = []
 
-        if isinstance(exponent, float):
+        if type(exponent) == float:
             for x in range(len(self.values)):
                 new_list.append(self.values[x] ** exponent)
         else:
@@ -67,7 +68,49 @@ class Simpy:
 
         return new_list
     
+    def __eq__(self, equals: Simpy | float) -> list[bool]:
+
+        bool_list: list[bool] = []
+
+        if type(equals) == float:
+            for x in range(len(self.values)):
+                if self.values[x] != equals:
+                    bool_list.append(False)
+                else:
+                    bool_list.append(True)
+        else:
+            for x in range(len(equals.values)):
+                if equals.values[x] != self.values[x]:
+                    bool_list.append(False)
+                else:
+                    bool_list.append(True)
+
+        return bool_list
+
+    def __gt__(self, greater_than: Simpy | float) -> list[bool]: 
+        bool_list: list[bool] = []
+
+        if type(greater_than) == float:
+            for x in range(len(self.values)):
+                if self.values[x] <= greater_than:
+                    bool_list.append(False)
+                else:
+                    bool_list.append(True)
+        else:
+            for x in range(len(self.values)):
+                if self.values[x] <= greater_than.values[x]:
+                    bool_list.append(False)
+                else:
+                    bool_list.append(True)
+
+        return bool_list
     
+    def __getitem__(self, rhs: int | list[float]) -> float | Simpy:
+
+        if type(rhs) == int:
+            return self.values[rhs]
+        else: 
+            return Simpy([self.values[index] for index in range(len(self.values)) if rhs[index]])
 
 ones = Simpy([1., 1., 1., 1., 1.])
 print(ones.values)
@@ -138,3 +181,36 @@ exponential_simpy.arange(0, 16)
 simpy_instance = simpy_instance ** exponential_simpy
 
 print(simpy_instance)
+
+a = Simpy([1.0, 2.0, 3.0, 4.0])
+b = Simpy([1.0, 2.0, 1.0, 4.0])
+c = a == b
+print("Actual: ", c, " - Expected: [True, True, False, True]")
+print("Actual: ", a == a, " - Expected: [True, True, True, True]")
+
+a = Simpy([1.0, 2.0, 1.0, 4.0])
+b = a == 1.0
+print("Actual: ", b, " - Expected: [True, False, True, False]")
+print("Actual: ", a == 2.0, " - Expected: [False, True, False, False]")
+
+a = Simpy([1.0, 2.0, 3.0, 4.0])
+b = Simpy([2.0, 1.0, 1.0, 5.0])
+c = a > b
+print("Actual: ", c, " - Expected: [False, True, True, False]")
+print("Actual: ", b > a, " - Expected: [True, False, False, True]")
+
+a = Simpy([1.0, 2.0, 3.0, 4.0])
+b = a > 2.0
+print("Actual: ", b, " - Expected: [False, False, True, True]")
+print("Actual: ", a > 3.0, " - Expected: [False, False, False, True]")
+
+a = Simpy([10.0, 20.0, 30.0])
+print("Actual: ", a[0], " - Expected: 10.0")
+print("Actual: ", a[1], " - Expected: 20.0")
+print("Actual: ", a[2], " - Expected: 30.0")
+
+a = Simpy([1.0, 2.0, 3.0, 4.0, 2.0, 1.0])
+b = a[a > 2.0]
+print("Actual: ", b, " - Expected: Simpy([3.0, 4.0])")
+print(a + 1.0 == 2.0)
+print("Actual: ", a[a + 1.0 == 2.0], " - Expected: Simpy([1.0, 1.0])")
